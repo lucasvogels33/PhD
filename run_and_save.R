@@ -10,6 +10,7 @@ cat("the size of the problems is: ",n,"\n")
 
 #--download the necessary libraries and load the run_experiments file --
 library( BDgraph )
+library (pROC)
 source("run_experiments.R")
 
 #--set parameters to simulate data --#
@@ -26,7 +27,7 @@ save = FALSE
 verbose = TRUE
 
 #-- run experiments
-result = sim_compute( p = p, n = n, graph = graph, type = type, vis = vis, 
+result = run_experiments( p = p, n = n, graph = graph, type = type, vis = vis, 
                       jump = jump, iter = iter, burnin = burnin, save = save, 
                       verbose = verbose )
 

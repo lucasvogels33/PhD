@@ -1,11 +1,9 @@
-### goal: download R and activate R script "send jobs" ###
-
 #!/bin/bash
 
 #set job requirements
 #SBATCH -n 1 
 #SBATCH -p normal
-#SBATCH -t 00:00:50
+#SBATCH -t 00:10:00
 
 #download R
 module load 2022
