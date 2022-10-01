@@ -1,7 +1,7 @@
 #--read the arguments --- #
 args = commandArgs(trailingOnly = TRUE)
-n = as.numeric(args[1])
-p = as.numeric(args[2])
+p = as.numeric(args[1])
+n = as.numeric(args[2])
 graph = args[3]
 iter_rep = as.numeric(args[4])
 

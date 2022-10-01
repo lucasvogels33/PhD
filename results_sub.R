@@ -13,9 +13,12 @@ load_results = function(p=5,graph="random",n=10,report="auc",round=2,iter_rep=10
             auc_mpl_bd[i] = result $ auc_mpl_bd
         }
 
-        result = list(auc_mpl_bd)
-    }
         
-
+    }
+    
+    result = list(auc_mpl_bd)
+    filename = paste0("output.Rdata")
+    save( result, file = filename )
+    
 
 }

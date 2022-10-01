@@ -13,6 +13,7 @@ round = 2
 
 load_results(p=p,graph=graph,n=n,report="auc",round=round,iter_rep=iter_rep)
 
-
-cat(mean(result $ auc_mpl_bd), file = "output", append = TRUE )
+filename = paste0("output.Rdata")
+load(file=filename)
+cat(mean(result $ auc_mpl_bd), file = "output_2", append = TRUE )
 
