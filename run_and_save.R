@@ -27,9 +27,13 @@ save = FALSE
 verbose = TRUE
 
 #-- run experiments
-result = run_experiments( p = p, n = n, graph = graph, type = type, vis = vis, 
+for (i in 1:iter_rep) 
+{
+    result = run_experiments( p = p, n = n, graph = graph, type = type, vis = vis, 
                       jump = jump, iter = iter, burnin = burnin, save = save, 
                       verbose = verbose )
 
-#--print data to a Rdata file
-save( result, file = paste0( "testdata.Rdata" ) )
+    #--print data to a Rdata file
+    filename = paste0("result_p",p,"_n",n,"_",graph,"_rep",i,".Rdata")
+    save( result, file = filename )
+}
