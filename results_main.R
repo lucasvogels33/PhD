@@ -5,14 +5,18 @@ require (pROC)
 
 source("results_sub.R")
 
-graph = "random"
-n = 10
-p = 5
-iter_rep = 3
+args = commandArgs(trailingOnly = TRUE)
+p = as.numeric(args[1])
+n = as.numeric(args[2])
+graph = args[3]
+iter_rep = as.numeric(args[4])
+
 round = 2
 
-result = load_results(p=p,graph=graph,n=n,report="auc",round=round,iter_rep=iter_rep)
+result = load_results(p=p,graph=graph,n=n,round=round,iter_rep=iter_rep)
 
-cat("auc ", mean(result $ auc_mpl_bd),"(",sd(result $ auc_mpl_bd),")", file = "output_mean", append = FALSE )
-cat("time ", mean(result $ time_mpl_bd),"(",sd(result $ time_mpl_bd),")", file = "output_mean", append = FALSE )
+filename = paste0(graph,"_output_mean")
+
+cat("auc ", mean(result $ auc_mpl_bd),"(",sd(result $ auc_mpl_bd),")", file = filename,"\n", append = TRUE )
+cat("time ", mean(result $ time_mpl_bd),"(",sd(result $ time_mpl_bd),")", file = filename,"\n", append = TRUE )
 

@@ -5,9 +5,6 @@ n = as.numeric(args[2])
 graph = args[3]
 iter_rep = as.numeric(args[4])
 
-#--print the size of the problem in the command prompt 
-cat("the size of the problems is: ",n,"\n")
-
 #--download the necessary libraries and load the run_experiments file --
 library( BDgraph )
 library (pROC)
@@ -33,7 +30,7 @@ for (i in 1:iter_rep)
 {
     result = run_experiments( p = p, n = n, graph = graph, type = type, vis = vis, 
                       jump = jump, iter = iter, burnin = burnin, save = save, 
-                      verbose = verbose )
+                      verbose = verbose 
 
     #--print data to a Rdata file
     filename = paste0("result_p",p,"_n",n,"_",graph,"_rep",i,".Rdata")

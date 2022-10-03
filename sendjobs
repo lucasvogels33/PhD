@@ -8,8 +8,10 @@
 #download R
 module load 2021
 module load R/4.1.0-foss-2021a
-Rscript --no-save --slave run_and_save.R 5 10 random 3
-Rscript --no-save --slave results_main.R 
+for graph in "random" "circle"
+    do Rscript --no-save --slave run_and_save.R 5 10 $graph 3
+    do Rscript --no-save --slave results_main.R 5 10 $graph 3
+done
 
 
 
