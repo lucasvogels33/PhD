@@ -11,14 +11,13 @@ load_results = function(p=5,graph="random",n=10,report="auc",round=2,iter_rep=10
         if ( report == "auc")
         {
             auc_mpl_bd[i] = result $ auc_mpl_bd
+            cat(auc_mpl_bd[i]," ", file = "output_all", append = TRUE)
         }
 
         
     }
     
-    result = list(auc_mpl_bd)
-    filename = paste0("output.Rdata")
-    save( result, file = filename )
+    return(list(auc_mpl_bd=auc_mpl_bd))
     
 
 }
