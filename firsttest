@@ -1,9 +1,0 @@
-#!/bin/bash
-
-#SBATCH --job-name=initiate_lisa
-#SBATCH --time=00:00:50
-#SBATCH --ntasks=1
-
-module load 2021
-module load R/4.1.0-foss-2021a
-Rscript 

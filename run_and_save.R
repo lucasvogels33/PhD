@@ -23,14 +23,14 @@ jump = 1
 save = FALSE
 verbose = TRUE
 
-set.seed(1)
+set.seed(2)
 
 #-- run experiments
 for (i in 1:iter_rep) 
 {
     result = run_experiments( p = p, n = n, graph = graph, type = type, vis = vis, 
                       jump = jump, iter = iter, burnin = burnin, save = save, 
-                      verbose = verbose 
+                      verbose = verbose) 
 
     #--print data to a Rdata file
     filename = paste0("result_p",p,"_n",n,"_",graph,"_rep",i,".Rdata")
