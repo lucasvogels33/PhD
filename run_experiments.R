@@ -1,5 +1,5 @@
 run_experiments = function( p = 10, n = 100, graph = "random", type = "Gaussian", 
-                        vis = FALSE, jump = 1, iter = 100000, burnin = 70000, 
+                        vis = FALSE, jump = 1, iter = 10000, burnin = 7000, 
                         save = FALSE, verbose = TRUE )
 {
 
@@ -20,7 +20,7 @@ auc_mpl_bd     = auc( roc_mpl_bd )[ 1 ]
 
 #----solve data using bdmcmc method with app ratio of norm constants--------#
 t1_bd_app      = proc.time()	
-sample_bd_app  = bdgraph( data = data.sim, algorithm = "bdmcmc", iter = iter, burnin = burnin, jump = jump, save = save, verbose = verbose )
+sample_bd_app  = bdgraph( data = data.sim, algorithm = "bdmcmc", iter = iter, burnin = burnin, jump = jump, save = save)
 time_bd_app    = as.numeric( ( proc.time() - t1_bd_app )[ 3 ] )
 	
 compare_bd_app = compare( data.sim, sample_bd_app )[ , 2 ]
@@ -30,7 +30,7 @@ auc_bd_app     = auc( roc_bd_app )[ 1 ]
 
 #----solve data using bdmcmc method with ex ratio of norm constants--------#
 t1_bd_ex      = proc.time()	
-sample_bd_ex  = bdgraph( data = data.sim, algorithm = "bd-dmh", iter = iter, burnin = burnin, jump = jump, save = save, verbose = verbose )
+sample_bd_ex  = bdgraph( data = data.sim, algorithm = "bd-dmh", iter = iter, burnin = burnin, jump = jump, save = save)
 time_bd_ex    = as.numeric( ( proc.time() - t1_bd_ex )[ 3 ] )
 	
 compare_bd_ex = compare( data.sim, sample_bd_ex )[ , 2 ]
@@ -40,7 +40,7 @@ auc_bd_ex     = auc( roc_bd_ex )[ 1 ]
 
 #----solve data using rj method with app ratio of norm constants--------#
 t1_rj_app      = proc.time()	
-sample_rj_app  = bdgraph( data = data.sim, algorithm = "rjmcmc", iter = iter, burnin = burnin, jump = jump, save = save, verbose = verbose )
+sample_rj_app  = bdgraph( data = data.sim, algorithm = "rjmcmc", iter = iter, burnin = burnin, jump = jump, save = save)
 time_rj_app    = as.numeric( ( proc.time() - t1_rj_app )[ 3 ] )
 	
 compare_rj_app = compare( data.sim, sample_rj_app )[ , 2 ]
@@ -50,7 +50,7 @@ auc_rj_app     = auc( roc_rj_app )[ 1 ]
 
 #----solve data using rj method with ex ratio of norm constants--------#
 t1_rj_ex     = proc.time()	
-sample_rj_ex  = bdgraph( data = data.sim, algorithm = "rj-dmh", iter = iter, burnin = burnin, jump = jump, save = save, verbose = verbose )
+sample_rj_ex  = bdgraph( data = data.sim, algorithm = "rj-dmh", iter = iter, burnin = burnin, jump = jump, save = save)
 time_rj_ex    = as.numeric( ( proc.time() - t1_rj_ex )[ 3 ] )
 	
 compare_rj_ex = compare( data.sim, sample_rj_ex )[ , 2 ]

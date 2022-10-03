@@ -3,7 +3,8 @@
 #set job requirements
 #SBATCH -n 1 
 #SBATCH -p normal
-#SBATCH -t 00:10:00
+$SBATCH --cpus-per-task = 3
+#SBATCH -t 05:00:00
 
 #download R
 module load 2021
