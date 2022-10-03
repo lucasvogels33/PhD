@@ -2,7 +2,7 @@ run_experiments = function( p = 10, n = 100, graph = "random", type = "Gaussian"
                         vis = FALSE, jump = 1, iter = 100000, burnin = 70000, 
                         save = FALSE, verbose = TRUE )
 {
-set.seed(1)
+
 
 ##-----simulate data-------------##
 

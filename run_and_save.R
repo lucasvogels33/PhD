@@ -20,11 +20,13 @@ size = NULL
 vis = FALSE
 
 #--set parameters to solve data --#
-iter = 500
+iter = 10000
 burnin= iter/2
 jump = 1
 save = FALSE
 verbose = TRUE
+
+set.seed(1)
 
 #-- run experiments
 for (i in 1:iter_rep) 

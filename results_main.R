@@ -13,5 +13,6 @@ round = 2
 
 result = load_results(p=p,graph=graph,n=n,report="auc",round=round,iter_rep=iter_rep)
 
-cat(mean(result $ auc_mpl_bd), file = "output_mean", append = FALSE )
+cat("auc ", mean(result $ auc_mpl_bd),"(",sd(result $ auc_mpl_bd),")", file = "output_mean", append = FALSE )
+cat("time ", mean(result $ time_mpl_bd),"(",sd(result $ time_mpl_bd),")", file = "output_mean", append = FALSE )
 
