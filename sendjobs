@@ -1,18 +1,19 @@
 #!/bin/bash
 
 #set job requirements
-#SBATCH -n 1 
+#SBATCH -N 1 
 #SBATCH -p normal
-$SBATCH --cpus-per-task = 3
-#SBATCH -t 05:00:00
+#SBATCH --constraint=gold_6130
+#SBATCH -c 16
+#SBATCH -t 23:59:00
 
 #download R
 module load 2021
 module load R/4.1.0-foss-2021a
-for graph in "random" "circle"
+for graph in "random" 
     do 
-    Rscript --no-save --slave run_and_save.R 5 10 $graph 3
-    Rscript --no-save --slave results_main.R 5 10 $graph 3
+    Rscript --no-save --slave run_and_save.R 50 100 $graph 1
+    Rscript --no-save --slave results_main.R 50 100 $graph 1
 done
 
 
