@@ -59,14 +59,14 @@ auc_rj_app     = auc( roc_rj_app )[ 1 ]
 #auc_rj_ex     = auc( roc_rj_ex )[ 1 ]
 
 #----solve data using ss method --------#
-t1_ss      = proc.time()	
-sample_ss  = ssgraph( data = data.sim, iter = iter, burnin = burnin, var1 = 4e-04, var2=1,lambda=1,g.start=g.start,save=save,cores=cores)
-time_ss    = as.numeric( ( proc.time() - t1_ss )[ 3 ] )
+#t1_ss      = proc.time()	
+#sample_ss  = ssgraph( data = data.sim, iter = iter, burnin = burnin, var1 = 4e-04, var2=1,lambda=1,g.start=g.start,save=save,cores=cores)
+#time_ss    = as.numeric( ( proc.time() - t1_ss )[ 3 ] )
 	
-compare_ss = compare( data.sim, sample_ss )[ , 2 ]
-plinks_ss  = as.matrix( sample_ss $ p_links, round = 10 )
-roc_ss     = BDgraph::roc( pred = sample_ss, actual = data.sim )
-auc_ss     = auc( roc_ss)[ 1 ]
+#compare_ss = compare( data.sim, sample_ss )[ , 2 ]
+#plinks_ss  = as.matrix( sample_ss $ p_links, round = 10 )
+#roc_ss     = BDgraph::roc( pred = sample_ss, actual = data.sim )
+#auc_ss     = auc( roc_ss)[ 1 ]
 
 
 # save solutions results in a list
@@ -76,7 +76,7 @@ return(list(
             #time_bd_ex = time_bd_ex, compare_bd_ex = compare_bd_ex, plinks_bd_ex = plinks_bd_ex, roc_bd_ex = roc_bd_ex, auc_bd_ex = auc_bd_ex,
             time_rj_app = time_rj_app, compare_rj_app = compare_rj_app, plinks_rj_app = plinks_rj_app, roc_rj_app = roc_rj_app, auc_rj_app = auc_rj_app,
             #time_rj_ex = time_rj_ex, compare_rj_ex = compare_rj_ex, plinks_rj_ex = plinks_rj_ex, roc_rj_ex = roc_rj_ex, auc_rj_ex = auc_rj_ex, 
-            time_ss = time_ss, compare_ss = compare_ss, plinks_ss = plinks_ss, roc_ss = roc_ss, auc_ss = auc_ss,
+            #time_ss = time_ss, compare_ss = compare_ss, plinks_ss = plinks_ss, roc_ss = roc_ss, auc_ss = auc_ss,
             true_g = as.matrix( data.sim $ G ) ) )
 
 

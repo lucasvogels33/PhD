@@ -30,8 +30,8 @@ load_results = function(p=5,graph="random",n=10,jump=1,round=2,iter_rep=10)
         time_rj_app[i] = result $ time_rj_app
         #auc_rj_ex[i] = result $ auc_rj_ex
         #time_rj_ex[i] = result $ time_rj_ex
-        auc_ss[i] = result $ auc_ss
-        time_ss[i] = result $ time_ss
+        #auc_ss[i] = result $ auc_ss
+        #time_ss[i] = result $ time_ss
 
         cat("auc of rep ",i," of the mpl_bd method is ",auc_mpl_bd[i]," ", file = filename_paste,"\n", append = TRUE)
         cat("time of rep ",i," of the mpl_bd method is ",time_mpl_bd[i]," ", file = filename_paste,"\n", append = TRUE)
@@ -43,8 +43,8 @@ load_results = function(p=5,graph="random",n=10,jump=1,round=2,iter_rep=10)
         cat("time of rep ",i," of the rj_app method is ",time_rj_app[i]," ", file = filename_paste,"\n", append = TRUE)
         #cat("auc of rep ",i," of the rj_ex method is ",auc_rj_ex[i]," ", file = filename_paste,"\n", append = TRUE)
         #cat("time of rep ",i," of the rj_ex method is ",time_rj_ex[i]," ", file = filename_paste,"\n", append = TRUE)
-        cat("auc of rep ",i," of the ss method is ",auc_ss[i]," ", file = filename_paste,"\n", append = TRUE)
-        cat("time of rep ",i," of the ss method is ",time_ss[i]," ", file = filename_paste,"\n", append = TRUE)
+        #cat("auc of rep ",i," of the ss method is ",auc_ss[i]," ", file = filename_paste,"\n", append = TRUE)
+        #cat("time of rep ",i," of the ss method is ",time_ss[i]," ", file = filename_paste,"\n", append = TRUE)
         cat("\n",append=TRUE,file=filename_paste)
 
         
@@ -55,7 +55,7 @@ load_results = function(p=5,graph="random",n=10,jump=1,round=2,iter_rep=10)
                 #auc_bd_ex=auc_bd_ex, time_bd_ex = time_bd_ex,
                 auc_rj_app=auc_rj_app, time_rj_app = time_rj_app,
                 #auc_rj_ex=auc_rj_ex, time_rj_ex = time_rj_ex,
-                auc_ss=auc_cc, time_ss=time_ss
+                #auc_ss=auc_cc, time_ss=time_ss
     ))
     
 

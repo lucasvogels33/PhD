@@ -9,6 +9,7 @@ jump = as.numeric(args[5])
 #--download the necessary libraries and load the run_experiments file --
 library( BDgraph )
 library (pROC)
+library (ssgraph)
 source("run_experiments.R")
 
 #--set parameters to simulate data --#

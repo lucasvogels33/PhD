@@ -28,6 +28,6 @@ cat("auc of rj_app ", mean(result $ auc_rj_app),"(",sd(result $ auc_rj_app),")",
 cat("time of rj_app ", mean(result $ time_rj_app),"(",sd(result $ time_rj_app),")", file = filename,"\n", append = TRUE )
 #cat("auc of rj_ex ", mean(result $ auc_rj_ex),"(",sd(result $ auc_rj_ex),")", file = filename,"\n", append = TRUE )
 #cat("time of rj_ex ", mean(result $ time_rj_ex),"(",sd(result $ time_rj_ex),")", file = filename,"\n", append = TRUE )
-cat("auc of ss ", mean(result $ auc_ss),"(",sd(result $ auc_ss),")", file = filename,"\n", append = TRUE )
-cat("time of ss ", mean(result $ time_ss),"(",sd(result $ time_ss),")", file = filename,"\n", append = TRUE )
+#cat("auc of ss ", mean(result $ auc_ss),"(",sd(result $ auc_ss),")", file = filename,"\n", append = TRUE )
+#cat("time of ss ", mean(result $ time_ss),"(",sd(result $ time_ss),")", file = filename,"\n", append = TRUE )
 

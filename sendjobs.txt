@@ -11,7 +11,7 @@
 module load 2021
 module load R/4.1.0-foss-2021a
 
-for graph in "random" 
+for graph in "random" "cluster" "scale-free"
     do 
     Rscript --no-save --slave run_and_save.R 50 100 $graph 1 1
     Rscript --no-save --slave results_main.R 50 100 $graph 1 1
