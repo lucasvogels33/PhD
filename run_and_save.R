@@ -4,7 +4,6 @@ p = as.numeric(args[1])
 n = as.numeric(args[2])
 graph = args[3]
 iter_rep = as.numeric(args[4])
-jump = as.numeric(args[5])
 
 #--download the necessary libraries and load the run_experiments file --
 library( BDgraph )
@@ -19,12 +18,13 @@ size = NULL
 vis = FALSE
 
 #--set parameters to solve data --#
-iter = 1000
-burnin= 300
+iter = 10
+burnin= 3
 save = FALSE
 verbose = FALSE
 g.start = "empty"
 cores = 1 
+jump = c(1,10)
 
 set.seed(2)
 
@@ -36,6 +36,6 @@ for (i in 1:iter_rep)
                       verbose = verbose,g.start =g.start ) 
     
     #--print data to a Rdata file
-    filename = paste0("result_p",p,"_n",n,"_",graph,"_jump",jump,"_rep",i,".Rdata")
+    filename = paste0("result_p",p,"_n",n,"_",graph,"_rep",i,".Rdata")
     save( result, file = filename )
 }
