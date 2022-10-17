@@ -43,29 +43,8 @@ for (p in p_list)
     {
 	    for( graph in graph_list )
 	    {
-		    {
-			    system( paste( "sbatch ", create_script( n = n, graph = graph, iter = iter,p=p,dir=dir,walltime=walltime,partition=partition,nodes=nodes,ntasks=ntasks,constraint=constraint), sep = "" ) )
-		    }
+			system( paste( "sbatch ", create_script( n = n, graph = graph, iter = iter,p=p,dir=dir,walltime=walltime,partition=partition,nodes=nodes,ntasks=ntasks,constraint=constraint), sep = "" ) )   
 	    }
     }    
 }     
 ## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |
-
-
-
-for graph in "random" "cluster" "scale-free"
-    do 
-    for n in 50 100
-        do
-        Rscript --no-save --slave run_and_save.R 50 $n $graph 10 &
-        done
-    done
-
-#write the outcomes in an output file
-for graph in "random" "cluster" "scale-free"
-    do 
-    for n in 50 100
-        do
-        Rscript --no-save --slave results_main.R 50 $n $graph 10 &
-        done
-    done
