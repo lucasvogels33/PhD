@@ -11,6 +11,7 @@
 module load 2021
 module load R/4.1.0-foss-2021a
 
+Rscript --no-save --slave run_and_save.R 
 #run the experiments and save the outcomes for three grahp types, and 2 n's
 for graph in "random" "cluster" "scale-free"
     do 
