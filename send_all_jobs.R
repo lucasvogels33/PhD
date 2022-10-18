@@ -7,12 +7,12 @@ create_script = function( n = 50, graph = "random", iter = 1, p = 10, constraint
 	
     cat( "#!/bin/bash", "\n", file = script_name)
     cat( "#SBATCH --job-name=", graph,"_p",p,"n_",n, "\n", file = script_name, append = TRUE, sep = "" )
-    cat( "#SBATCH --output=",   graph,"_p",p,"n_",n,"_output" "\n", file = script_name, append = TRUE, sep = "" )
+    cat( "#SBATCH --output=",   graph,"_p",p,"n_",n,"_output","\n", file = script_name, append = TRUE, sep = "" )
     cat( "#SBATCH --nodes=",     nodes,     "\n", file = script_name, append = TRUE, sep = "" )
 	cat( "#SBATCH --ntasks=",    ntasks,    "\n", file = script_name, append = TRUE, sep = "" )
 	cat( "#SBATCH --time=",      walltime,  "\n", file = script_name, append = TRUE, sep = "" )
 	cat( "#SBATCH --partition=", partition, "\n", file = script_name, append = TRUE, sep = "" )
-    cat("#SBATCH --constraint=",constraint, "\n", file = script_name, append = TRUE, sep = "" )
+    cat("#SBATCH --constraint=",constrsaint, "\n", file = script_name, append = TRUE, sep = "" )
 	cat( "cd ", dir,"\n", file = script_name, append = TRUE, sep = "" )
 	
     cat("module load 2021","\n",file = script_name, append = TRUE, sep = "" )
@@ -27,14 +27,14 @@ create_script = function( n = 50, graph = "random", iter = 1, p = 10, constraint
 ## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |
 graph_list = c("random","cluster","scale-free")
 n_list = c(50,100)
-p_list = c(50)
-iter = 10
+p_list = c(10)
+iter = 2
 walltime = "00-23:59:00"
 partition = "normal"
 nodes = 1
 ntasks = 1
 constraint = "gold_6130"
-dir = "$HOME/temp"
+dir = "$HOME/temp2"
 ##---------------------------------------------------------------------------|
 
 

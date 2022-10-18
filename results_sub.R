@@ -77,7 +77,7 @@ load_results = function(p=5,graph="random",n=10,round=2,iter_rep=10)
                 auc_bd_app2=auc_bd_app2, time_bd_app2 = time_bd_app2,
                 #auc_bd_ex=auc_bd_ex, time_bd_ex = time_bd_ex,
                 auc_rj_app1=auc_rj_app1, time_rj_app1 = time_rj_app1,
-                auc_rj_app2=auc_rj_app2, time_rj_app2 = time_rj_app2
+                auc_rj_app2=auc_rj_app2, time_rj_app2 = time_rj_app2,
                 #,auc_rj_ex=auc_rj_ex, time_rj_ex = time_rj_ex,
                 auc_ss=auc_cc, time_ss=time_ss
     ))
