@@ -18,15 +18,15 @@ size = NULL
 vis = FALSE
 
 #--set parameters to solve data --#
-iter = 10
-burnin= 3
+iter = 60000
+burnin= 30000
 save = FALSE
 verbose = FALSE
 g.start = "empty"
 cores = 1 
 jump = c(1,10)
 
-set.seed(2)
+set.seed(10)
 
 #-- run experiments
 for (i in 1:iter_rep) 

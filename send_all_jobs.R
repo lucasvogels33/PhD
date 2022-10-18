@@ -7,7 +7,7 @@ create_script = function( n = 50, graph = "random", iter = 1, p = 10, constraint
 	
     cat( "#!/bin/bash", "\n", file = script_name)
     cat( "#SBATCH --job-name=", graph,"_p",p,"n_",n, "\n", file = script_name, append = TRUE, sep = "" )
-    cat( "#SBATCH --output=",   graph,"_p",p,"n_",n, "\n", file = script_name, append = TRUE, sep = "" )
+    cat( "#SBATCH --output=",   graph,"_p",p,"n_",n,"_output" "\n", file = script_name, append = TRUE, sep = "" )
     cat( "#SBATCH --nodes=",     nodes,     "\n", file = script_name, append = TRUE, sep = "" )
 	cat( "#SBATCH --ntasks=",    ntasks,    "\n", file = script_name, append = TRUE, sep = "" )
 	cat( "#SBATCH --time=",      walltime,  "\n", file = script_name, append = TRUE, sep = "" )
@@ -39,6 +39,7 @@ dir = "$HOME/temp"
 
 
 for (p in p_list)
+{
     for( n in n_list )
     {
 	    for( graph in graph_list )

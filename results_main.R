@@ -17,22 +17,26 @@ round = 2
 
 result = load_results(p=p,graph=graph,n=n,round=round,iter_rep=iter_rep)
 
-filename_paste = paste0(graph,"_n=",n,"_output_all")
+filename = paste0(graph,"_n=",n,"_output_meansd:")
 
-cat("auc of mpl_bd ", mean(result $ auc_mpl_bd),"(",sd(result $ auc_mpl_bd),")", file = filename,"\n", append = TRUE )
-cat("time of mpl_bd ", mean(result $ time_mpl_bd),"(",sd(result $ time_mpl_bd),")", file = filename,"\n", append = TRUE )
-cat("auc of bd_app ", mean(result $ auc_bd_app1),"(",sd(result $ auc_bd_app1),")", file = filename,"\n", append = TRUE )
-cat("time of bd_app ", mean(result $ time_bd_app1),"(",sd(result $ time_bd_app1),")", file = filename,"\n", append = TRUE )
-cat("auc of bd_app ", mean(result $ auc_bd_app2),"(",sd(result $ auc_bd_app2),")", file = filename,"\n", append = TRUE )
-cat("time of bd_app ", mean(result $ time_bd_app2),"(",sd(result $ time_bd_app2),")", file = filename,"\n", append = TRUE)
-#cat("auc of bd_ex ", mean(result $ auc_bd_ex),"(",sd(result $ auc_bd_ex),")", file = filename,"\n", append = TRUE )
-#cat("time of bd_ex ", mean(result $ time_bd_ex),"(",sd(result $ time_bd_ex),")", file = filename,"\n", append = TRUE )
-cat("auc of rj_app ", mean(result $ auc_rj_app1),"(",sd(result $ auc_rj_app1),")", file = filename,"\n", append = TRUE )
-cat("time of rj_app ", mean(result $ time_rj_app1),"(",sd(result $ time_rj_app1),")", file = filename,"\n", append = TRUE )
-cat("auc of rj_app ", mean(result $ auc_rj_app2),"(",sd(result $ auc_rj_app2),")", file = filename,"\n", append = TRUE )
-cat("time of rj_app ", mean(result $ time_rj_app2),"(",sd(result $ time_rj_app2),")", file = filename,"\n", append = TRUE )
-#cat("auc of rj_ex ", mean(result $ auc_rj_ex),"(",sd(result $ auc_rj_ex),")", file = filename,"\n", append = TRUE )
-#cat("time of rj_ex ", mean(result $ time_rj_ex),"(",sd(result $ time_rj_ex),")", file = filename,"\n", append = TRUE )
-#cat("auc of ss ", mean(result $ auc_ss),"(",sd(result $ auc_ss),")", file = filename,"\n", append = TRUE )
-#cat("time of ss ", mean(result $ time_ss),"(",sd(result $ time_ss),")", file = filename,"\n", append = TRUE )
+cat("auc values", file = filename,"\n", append = TRUE )
+cat("mpl (jump=1) & mpl (jump = 10) & bd (jump=1) & bd (jump=10) & rj (jump=1) & rj (jump=10) & ss ",file = filename,"\n", append = TRUE )
+cat(mean(result $ auc_mpl_bd1),"(",sd(result $ auc_mpl_bd1),") & ",
+    mean(result $ auc_mpl_bd2),"(",sd(result $ auc_mpl_bd2),") & ",
+    mean(result $ auc_bd_app1),"(",sd(result $ auc_bd_app1),") & ",
+    mean(result $ auc_bd_app2),"(",sd(result $ auc_bd_app2),") & ",
+    mean(result $ auc_rj_app1),"(",sd(result $ auc_rj_app1),") & ",
+    mean(result $ auc_rj_app2),"(",sd(result $ auc_rj_app2),") & ",
+    mean(result $ auc_ss),"(",sd(result $ auc_ss),")",
+    file = filename,"\n", append = TRUE )
 
+cat("time values", file = filename,"\n", append = TRUE )
+cat("mpl (jump=1) & mpl (jump = 10) & bd (jump=1) & bd (jump=10) & rj (jump=1) & rj (jump=10) & ss ",file = filename,"\n", append = TRUE )
+cat(mean(result $ time_mpl_bd1),"(",sd(result $ time_mpl_bd1),") & ",
+    mean(result $ time_mpl_bd2),"(",sd(result $ time_mpl_bd2),") & ",
+    mean(result $ time_bd_app1),"(",sd(result $ time_bd_app1),") & ",
+    mean(result $ time_bd_app2),"(",sd(result $ time_bd_app2),") & ",
+    mean(result $ time_rj_app1),"(",sd(result $ time_rj_app1),") & ",
+    mean(result $ time_rj_app2),"(",sd(result $ time_rj_app2),") & ",
+    mean(result $ time_ss),"(",sd(result $ auc_ss),")",
+    file = filename,"\n", append = TRUE )
