@@ -6,18 +6,18 @@ require (pROC)
 source("results_sub.R")
 
 graph_list = c("random","cluster","scale-free")
-n_list = c(50,100)
+n_list = c(10,20,100)
 p_list = c(10)
 round_nr = 2
-iter_rep = 2
+iter_rep = 10
 
 filename_auc = "latex_auc"
 filename_time = "latex_time"
 
-cat("mpl (jump=1) & mpl (jump = 10) & bd (jump=1) & bd (jump=10) & rj (jump=1) & rj (jump=10) & ss  \\ ",file = filename_auc,"\n", append = TRUE )
+cat("& mpl (jump=1) & mpl (jump = 10) & bd (jump=1) & bd (jump=10) & rj (jump=1) & rj (jump=10) & ss  \\","\\",sep="",file = filename_auc,"\n", append = TRUE )
 cat("\\hline \\","\\",sep="",file = filename_auc,"\n", append = TRUE )
 
-cat("mpl (jump=1) & mpl (jump = 10) & bd (jump=1) & bd (jump=10) & rj (jump=1) & rj (jump=10) & ss  \\ ",file = filename_time,"\n", append = TRUE )
+cat(" & mpl (jump=1) & mpl (jump = 10) & bd (jump=1) & bd (jump=10) & rj (jump=1) & rj (jump=10) & ss  \\","\\",file = filename_time,"\n", append = TRUE )
 cat("\\hline \\","\\",sep="",file = filename_time,"\n", append = TRUE )
 
 for (p in p_list)

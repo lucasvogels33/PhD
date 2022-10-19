@@ -18,8 +18,8 @@ size = NULL
 vis = FALSE
 
 #--set parameters to solve data --#
-iter = 1000
-burnin= 500
+iter = 60000
+burnin= 30000
 save = FALSE
 verbose = FALSE
 g.start = "empty"
