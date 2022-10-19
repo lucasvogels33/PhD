@@ -12,15 +12,14 @@ create_script = function( n = 50, graph = "random", iter = 1, p = 10, constraint
 	cat( "#SBATCH --ntasks=",    ntasks,    "\n", file = script_name, append = TRUE, sep = "" )
 	cat( "#SBATCH --time=",      walltime,  "\n", file = script_name, append = TRUE, sep = "" )
 	cat( "#SBATCH --partition=", partition, "\n", file = script_name, append = TRUE, sep = "" )
-    cat("#SBATCH --constraint=",constrsaint, "\n", file = script_name, append = TRUE, sep = "" )
+    cat("#SBATCH --constraint=",constraint, "\n", file = script_name, append = TRUE, sep = "" )
 	cat( "cd ", dir,"\n", file = script_name, append = TRUE, sep = "" )
 	
     cat("module load 2021","\n",file = script_name, append = TRUE, sep = "" )
     cat("module load R/4.1.0-foss-2021a","\n",file = script_name, append = TRUE, sep = "" )
 
 	cat( "Rscript --no-save --slave run_and_save.R ",p," ",n," ",graph," ",iter,"\n",file=script_name,append = TRUE, sep = "" )
-    cat( "Rscript --no-save --slave results_main.R ",p," ",n," ",graph," ",iter,"\n",file=script_name,append = TRUE, sep = "" )
-    
+       
 	return( script_name )
 }
 
