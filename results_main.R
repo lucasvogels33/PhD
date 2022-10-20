@@ -6,8 +6,8 @@ require (pROC)
 source("results_sub.R")
 
 graph_list = c("random","cluster","scale-free")
-n_list = c(50,100,500)
-p_list = c(50)
+n_list = c(100,200,1000)
+p_list = c(100)
 round_nr = 2
 iter_rep = 10
 
