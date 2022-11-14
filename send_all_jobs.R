@@ -24,11 +24,11 @@ create_script = function( n = 50, graph = "random", iter = 1, p = 10, constraint
 }
 
 ## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |
-graph_list = c("random") # ,"cluster","scale-free")
-n_list = c(10)
+graph_list = c("random","cluster","scale-free") 
+n_list = c(10,20,100)
 p_list = c(10)
-iter = 2
-walltime = "00:10:00"
+iter = 50
+walltime = "10:00:00"
 partition = "normal" 
 nodes = 1
 ntasks = 1
