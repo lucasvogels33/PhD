@@ -18,7 +18,7 @@ size = NULL
 vis = FALSE
 
 #--set parameters to solve data --#
-iter = 60000
+iter = 100000
 burnin= 30000
 save = TRUE
 verbose = FALSE

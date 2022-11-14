@@ -10,7 +10,7 @@ data.sim = bdgraph.sim( p = p, n = n, graph = graph, prob = prob, size = size, t
 #----solve data using mpl_bd method --##
 t1_mpl_bd      = proc.time()	#start time
 sample_mpl_bd  = bdgraph.mpl( data = data.sim, algorithm = "bdmcmc", iter = iter, burnin = burnin, jump = jump, save = save,cores=cores,g.start=g.start,g.prior=g.prior)
-time_mpl_bd    = as.numeric( ( proc.time() - t1_mpl)[ 3 ] ) #end and save time
+time_mpl_bd    = as.numeric( ( proc.time() - t1_mpl_bd)[ 3 ] ) #end and save time
 
 all_weights_mpl_bd = round(sample_mpl_bd$all_weights,10) #obtain weights for AUC vs iteration graph
 all_graphs_mpl_bd = sample_mpl_bd$all_graphs #obtain graphs for AUC vs iteration graph
@@ -19,7 +19,7 @@ sample_graphs_mpl_bd = sample_mpl_bd$sample_graphs #obtain graphs for AUC vs ite
 #----solve data using mpl_rj method --##
 t1_mpl_rj      = proc.time()	#start time
 sample_mpl_rj  = bdgraph.mpl( data = data.sim, algorithm = "rjmcmc", iter = iter, burnin = burnin, jump = jump, save = save,cores=cores,g.start=g.start,g.prior=g.prior)
-time_mpl_rj    = as.numeric( ( proc.time() - t1_mpl)[ 3 ] ) #end and save time
+time_mpl_rj    = as.numeric( ( proc.time() - t1_mpl_rj)[ 3 ] ) #end and save time
 
 all_weights_mpl_rj = round(sample_mpl_rj$all_weights,10) #obtain weights for AUC vs iteration graph
 all_graphs_mpl_rj = sample_mpl_rj$all_graphs #obtain graphs for AUC vs iteration graph

@@ -3,22 +3,41 @@
 ##CE_lot_cut takes as input an actual matrix and a predictor matrix. It outputs a vector of alpha values with corresponding CE(alpha) values. Optionally it plots these vectors and calculates the area under thsi curve
 ##area_ROC_CE_per_iter takes an bdgraph.obj and an actual matrix as input. It calculates the area under the ROC curve and the area under the CE curve at every x iterations, where x = thin. 
 
-
-CE_area =function(actual = actual, predictor=predictor){
-  pred_upper = predictor[upper.tri(predictor)]
-  act_upper = actual[upper.tri(actual)]
-  area = sum(abs(pred_upper-act_upper))
-  return(area)
-}
-
-CE_plot_cut = function(response,predictor,plot=FALSE,area=FALSE,cut=200){
+calc_SVAUC = function(response=response,predictor=predictor){
+  
+  #make sure predictor and response have the same length
   if (length(response) != length(predictor)) {
     stop("response and predictor vector must be of same length")
   }
+
+  predictor.order = order(predictor,decreasing=TRUE)
+  predictor.sorted = predictor[predictor.order]
+  response.sorted = response[predictor.order]
+  ones = sum(response)
+  zeroes = length(response)-ones
   
-  #convert matrices into a vector of their upper triangular values
-  response = response[upper.tri(response)]
-  predictor = predictor[upper.tri(predictor)]
+  #obtain the true positive vector
+  tp = cumsum(response.sorted==1)
+  tp = c(0,tp)
+  tpr = tp/ones
+  #obtain the false postive vector
+  fp = cumsum(response.sorted==0)
+  fp = c(0,fp)
+  fpr = fp/zeroes
+
+  #calculate threshold ranges
+  top = c(1,predictor.sorted)
+  bottom = c(predictor.sorted,0)
+  ranges = top-bottom
+  
+  SVAUC = sum(ranges*(1-fpr)*tpr)
+  return(SVAUC)
+}
+
+CE_ROC_plot_cut = function(response,predictor,plot=FALSE,area=FALSE,cut=200){
+  if (length(response) != length(predictor)) {
+    stop("response and predictor vector must be of same length")
+  }
   
   cut_points = (1:(cut-1))/cut
   CE_vec = c(rep(0,length(cut_points)))
@@ -69,13 +88,18 @@ CE_plot_cut = function(response,predictor,plot=FALSE,area=FALSE,cut=200){
     #plot CE curve
     plot(NA,xlim=c(0,1),ylim=c(0,1),xlab="alpha",ylab="CE")
     points(x=cut_points,y=CE_vec,type="l")
+
+    #plot ROC curve
+    plot(NA,xlim=c(0,1),ylim=c(0,1),xlab="FPR",ylab="TPR")
+    points(x=fp,y=tp,type="l")
+
   }
   
-  return(list(cut_points=cut_points,CE_vec=CE_vec,area_under=area_under,area_above=area_above,plot=plot))
+  return(list(cut_points=cut_points,CE_vec=CE_vec,tp=tp,fp=fp,area_under=area_under,area_above=area_above,plot=plot))
   
 }
 
-area_ROC_CE_per_iter = function (bdgraph.obj, actual, thin = NULL, verbose = TRUE) 
+area_ROC_CE_per_iter = function (all_graphs=NULL,sample_graphs=NULL,all_weights=NULL, actual, thin = NULL, verbose = TRUE) 
 {
   #check if actual matrix is in correct format
   if (is.matrix(actual)) 
@@ -84,32 +108,24 @@ area_ROC_CE_per_iter = function (bdgraph.obj, actual, thin = NULL, verbose = TRU
   if (inherits(actual, "sim")) 
     actual = actual$G
   
-  #check if solution is in right format
-  if ((inherits(bdgraph.obj, "bdgraph")) | (inherits(bdgraph.obj, 
-                                                     "ssgraph"))) {
-    if (is.null(bdgraph.obj$all_graphs)) 
-      stop("'bdgraph.obj' must be an object of function 'bdgraph()' or 'ssgraph()' with option 'save = TRUE'")
-    if (is.null(bdgraph.obj$all_graphs)) 
-      stop("'bdgraph.obj' must be an object of function 'bdgraph()' or 'ssgraph()' with option 'save = TRUE'")
-  }
-  else {
-    stop("'bdgraph.obj' must be an object of functions 'bdgraph()', 'bdgraph.mpl()', or 'ssgraph()'")
-  }
+  if (is.null(all_graphs))
+    stop("please include the argument all_graphs")
+  if (is.null(sample_graphs))
+      stop("please include the argument sample_graphs")
+  if (is.null(all_weights))
+      stop("please include the argument all_weights")
   
   #check if the thin value is in the right format
   if (is.null(thin)) 
-    thin = ceiling(length(bdgraph.obj$all_graphs)/1000)
+    stop("'thin' must be a number")
   if (!is.numeric(thin)) 
     stop("'thin' must be a number")
   if (is.matrix(thin)) 
     stop("'thin' must be a number")
   
   #obtain input
-  sample_graphs = bdgraph.obj$sample_graphs
-  p = nrow(bdgraph.obj$last_graph)
+  p = nrow(actual)
   qp = p * (p - 1)/2
-  all_weights = bdgraph.obj$all_weights
-  all_graphs = bdgraph.obj$all_graphs
   response = actual[upper.tri(actual)]
   
   #create output vectors
@@ -122,6 +138,7 @@ area_ROC_CE_per_iter = function (bdgraph.obj, actual, thin = NULL, verbose = TRU
   iter_vec_thin = c(thin * (1:floor(iter/thin)))
   auROC_vec = c(rep(0,length(iter_vec_thin)))
   auCE_vec = c(rep(0,length(iter_vec_thin)))
+  SVAUC_vec = c(rep(0,length(iter_vec_thin)))
   
   #we compute the edge inclusion matrix at every single iteration
   for (g in 1:iter) {
@@ -140,7 +157,7 @@ area_ROC_CE_per_iter = function (bdgraph.obj, actual, thin = NULL, verbose = TRU
     
   }
   
-  #we calculate the AUC and CE values every x=thin iterations
+  #we calculate the AUC, CE and SVAUC values every x=thin iterations
   i = 0
   for (g in iter_vec_thin){
     
@@ -155,9 +172,16 @@ area_ROC_CE_per_iter = function (bdgraph.obj, actual, thin = NULL, verbose = TRU
     #compute and save area under the curve
     predictor = result_plinks[,g]
     auROC_vec[i] = auc(pROC::roc(response=response,predictor=predictor,quiet=TRUE))[1]
-    auCE_vec[i] = sum(abs(predictor-response))
+    auCE_vec[i] = sum(abs(predictor-response))/qp
+    SVAUC_vec[i] = calc_SVAUC(predictor=predictor,response=response)
   }
   
+  #calculate final values AUC, CE, SVAUC and p_links
+  plinks = result_plinks[,iter] 
+  AUC = auc(pROC::roc(response=response,predictor=plinks,quiet=TRUE))[1]
+  CE = sum(abs(plinks-response))/qp
+  SVAUC = calc_SVAUC(predictor=plinks,response=response)
+
   if (verbose == TRUE) {
     mes = paste(c("Calculation ... done.                        "), 
                 collapse = "")
@@ -166,5 +190,5 @@ area_ROC_CE_per_iter = function (bdgraph.obj, actual, thin = NULL, verbose = TRU
     utils::flush.console()
   }
   
-  return(list(auROC_vec = auROC_vec,iter_vec_thin=iter_vec_thin,result_plinks=result_plinks,auCE_vec=auCE_vec))
+  return(list(plinks=plinks,AUC=AUC,CE=CE,SVAUC=SVAUC,auROC_vec = auROC_vec,iter_vec_thin=iter_vec_thin,result_plinks=result_plinks,auCE_vec=auCE_vec,SVAUC_vec=SVAUC_vec))
 }
