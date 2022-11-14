@@ -15,8 +15,8 @@ create_script = function( n = 50, graph = "random", iter = 1, p = 10, constraint
     cat("#SBATCH --constraint=",constraint, "\n", file = script_name, append = TRUE, sep = "" )
 	cat( "cd ", dir,"\n", file = script_name, append = TRUE, sep = "" )
 	
-    cat("module load 2021","\n",file = script_name, append = TRUE, sep = "" )
-    cat("module load R/4.1.0-foss-2021a","\n",file = script_name, append = TRUE, sep = "" )
+    cat("module load 2022","\n",file = script_name, append = TRUE, sep = "" )
+    cat("module load R/4.2.1-foss-2022a","\n",file = script_name, append = TRUE, sep = "" )
 
 	cat( "Rscript --no-save --slave run_and_save.R ",p," ",n," ",graph," ",iter,"\n",file=script_name,append = TRUE, sep = "" )
        
@@ -25,15 +25,15 @@ create_script = function( n = 50, graph = "random", iter = 1, p = 10, constraint
 
 ## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |
 graph_list = c("random","cluster","scale-free")
-n_list = c(100,200,1000)
-p_list = c(100)
-iter = 10
-walltime = "01-23:59:00"
+n_list = c(10,20,100)
+p_list = c(10)
+iter = 3
+walltime = "00:10:00"
 partition = "normal"
 nodes = 1
 ntasks = 1
 constraint = "gold_6130"
-dir = "$HOME/temp3"
+dir = "$HOME/results_p10"
 ##---------------------------------------------------------------------------|
 
 

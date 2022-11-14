@@ -20,20 +20,23 @@ vis = FALSE
 #--set parameters to solve data --#
 iter = 60000
 burnin= 30000
-save = FALSE
+save = TRUE
 verbose = FALSE
 g.start = "empty"
+g.prior = 0.2
 cores = 1 
-jump = c(1,10)
-
-set.seed(10)
+jump = 1 
+var1 = 0.02 #ss parameter
+var2 = 2 #ss parameter
+lambda = 1 #ss parameter
 
 #-- run experiments
 for (i in 1:iter_rep) 
 {
+    set.seed(i)
     result = run_experiments( p = p, n = n, graph = graph, type = type, vis = vis, 
                       jump = jump, iter = iter, burnin = burnin, save = save, cores = cores,
-                      verbose = verbose,g.start =g.start ) 
+                      verbose = verbose,g.start =g.start,var1=var1,var2=var2,lambda=lambda,g.prior=g.prior) 
     
     #--print data to a Rdata file
     filename = paste0("result_p",p,"_n",n,"_",graph,"_rep",i,".Rdata")
