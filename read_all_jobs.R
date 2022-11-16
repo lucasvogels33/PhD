@@ -7,6 +7,8 @@ graph_list = c("random") #c("random","cluster","scale-free")
 n_list = c(10) #c(10,20,100)
 p_list = c(10)
 rep_list = c(1:2)
+thin = 100
+cut = 200
 ##---------------------------------------------------------------------------|
 
 for (graph in graph_list){
@@ -14,7 +16,7 @@ for (graph in graph_list){
         for (p in p_list){
             
             #average over all replications and save    
-            avg_obj = avg_metrics(n_vec=c(n),p_vec=c(p),graph_vec=c(graph),rep_vec=rep_list,thin=100,plot=FALSE,cut=200)
+            avg_obj = avg_metrics(n_vec=c(n),p_vec=c(p),graph_vec=c(graph),rep_vec=rep_list,thin=thin,plot=FALSE,cut=cut)
             filename = paste0("AVERAGE_p",p,"_n",n,"_",graph,".Rdata")
             save(avg_obj, file = filename )
 

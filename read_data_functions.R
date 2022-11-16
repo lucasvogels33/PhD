@@ -292,66 +292,9 @@ avg_metrics = function(n_vec=c(100),p_vec=c(100),graph_vec=c("random"),rep_vec=c
             SVAUC_iter_ss = SVAUC_iter_ss,
             tp_cut_ss = tp_cut_ss, fp_cut_ss = fp_cut_ss, CE_cut_ss = CE_cut_ss,
 
-            iter_vec_thin= iter_vec_thin
+            iter_vec_thin= iter_vec_thin,
             cut_points = cut_points))
 
-}
-
-avg_plots = function(n_vec=c(100),p_vec=c(100),graph_vec=c("random"),rep_vec=c(1:50),cut=200,plot=FALSE){
-  length = length(n_vec)*length(p_vec)*length(graph_vec)*length(rep_vec)
-  
-  #set cutpoints (x-axis for CE graph)
-  cut_points = (1:(cut-1))/cut
-  cut_points = c(0,cut_points,1)
-
-  CE_cut_vec_mpl_bd = c(rep(0,length(cut_points)+2))
-  tpr_mpl_bd = c(rep(0,length(cut_points)+2))
-  fpr_mpl_bd = c(rep(0,length(cut_points)+2)) 
-  
-  CE_cut_vec_mpl_rj = c(rep(0,length(cut_points)+2))
-  tpr_mpl_rj = c(rep(0,length(cut_points)+2))
-  fpr_mpl_rj = c(rep(0,length(cut_points)+2))  
-  
-  CE_cut_vec_bd = c(rep(0,length(cut_points)+2))
-  tpr_bd = c(rep(0,length(cut_points)+2))
-  fpr_bd = c(rep(0,length(cut_points)+2))  
-  
-  CE_cut_vec_rj = c(rep(0,length(cut_points)+2))
-  tpr_rj = c(rep(0,length(cut_points)+2))
-  fpr_rj = c(rep(0,length(cut_points)+2))  
-  
-  CE_cut_vec_ss = c(rep(0,length(cut_points)+2))
-  tpr_ss = c(rep(0,length(cut_points)+2))
-  fpr_ss = c(rep(0,length(cut_points)+2))
-  i = 0
-
-  for (p in p_vec){  
-    for (n in n_vec){
-      for (graph in graph_vec){
-        for (rep in rep_vec){
-            i = i+1
-
-            filename = paste0("result_p",p,"_n",n,"_",graph,"_rep",rep,".Rdata")
-            load(file = filename)
-            actual = result$true_g
-            response = actual[upper.tri(actual)]
-            
-            plinks_mpl_bd = obj_mpl_bd$plinks
-            
-            how to obtain the predictor...
-
-            obj_plot_mpl_bd = CE_ROC_plot_cut(response=response,predictor=predictor,plot=FALSE,area=FALSE,cut=cut)
-            CE_cut_vec_mpl_bd = CE_cut_vec_mpl_bd + obj_plot_mpl_bd$CE_vec
-            tpr_mpl_bd = tpr_mpl_bd + obj_plot_mpl_bd$tp
-            fpr_mpl_bd = fpr_mpl_bd + obj_plot_mpl_bd$fp
-        }
-      }
-    }
-  }
-
-  CE_cut_vec_mpl_bd = CE_cut_vec_mpl_bd/length
-  tpr_mpl_bd = tpr_mpl_bd/length
-  fpr_mpl_bd = fpr_mpl_bd/length
 }
 
 calc_SVAUC = function(response=response,predictor=predictor){
