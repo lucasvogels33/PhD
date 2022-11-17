@@ -103,14 +103,14 @@ avg_metrics = function(n_vec=c(100),p_vec=c(100),graph_vec=c("random"),rep_vec=c
             all_graphs_mpl_bd = result$all_graphs_mpl_bd
             sample_graphs_mpl_bd = result$sample_graphs_mpl_bd
             all_weights_mpl_bd = result$all_weights_mpl_bd
-            time_mpl_bd = result$time_mpl_bd
+            time = result$time_mpl_bd
 
             obj_mpl_bd = area_ROC_CE_per_iter(all_graphs=all_graphs_mpl_bd,sample_graphs=sample_graphs_mpl_bd,all_weights=all_weights_mpl_bd, actual=actual, thin = thin, verbose = TRUE) 
 
             AUC_mpl_bd[i] = obj_mpl_bd$AUC
             CE_mpl_bd[i] = obj_mpl_bd$CE
             SVAUC_mpl_bd[i] = obj_mpl_bd$SVAUC
-            time_mpl_bd[i] = time_mpl_bd
+            time_mpl_bd[i] = time
 
             #--obtain AUC,CE,SVAUC per iter vectors
             AUC_iter_mpl_bd = AUC_iter_mpl_bd + obj_mpl_bd$AUC_vec
@@ -129,7 +129,7 @@ avg_metrics = function(n_vec=c(100),p_vec=c(100),graph_vec=c("random"),rep_vec=c
             all_graphs_mpl_rj = result$all_graphs_mpl_rj
             sample_graphs_mpl_rj = result$sample_graphs_mpl_rj
             all_weights_mpl_rj = result$all_weights_mpl_rj
-            time_mpl_rj = result$time_mpl_rj
+            time = result$time_mpl_rj
 
             obj_mpl_rj = area_ROC_CE_per_iter(all_graphs=all_graphs_mpl_rj,sample_graphs=sample_graphs_mpl_rj,all_weights=all_weights_mpl_rj, actual=actual, thin = thin, verbose = TRUE) 
 
@@ -137,7 +137,7 @@ avg_metrics = function(n_vec=c(100),p_vec=c(100),graph_vec=c("random"),rep_vec=c
             AUC_mpl_rj[i] = obj_mpl_rj$AUC
             CE_mpl_rj[i] = obj_mpl_rj$CE
             SVAUC_mpl_rj[i] = obj_mpl_rj$SVAUC
-            time_mpl_rj[i] = time_mpl_rj
+            time_mpl_rj[i] = time
 
             AUC_iter_mpl_rj = AUC_iter_mpl_rj + obj_mpl_rj$AUC_vec
             CE_iter_mpl_rj = CE_iter_mpl_rj + obj_mpl_rj$CE_vec
@@ -155,13 +155,13 @@ avg_metrics = function(n_vec=c(100),p_vec=c(100),graph_vec=c("random"),rep_vec=c
             all_graphs_bd = result$all_graphs_bd
             sample_graphs_bd = result$sample_graphs_bd
             all_weights_bd = result$all_weights_bd
-            time_bd = result$time_bd
+            time = result$time_bd
 
             obj_bd = area_ROC_CE_per_iter(all_graphs=all_graphs_bd,sample_graphs=sample_graphs_bd,all_weights=all_weights_bd, actual=actual, thin = thin, verbose = TRUE) 
             AUC_bd[i] = obj_bd$AUC
             CE_bd[i] = obj_bd$CE
             SVAUC_bd[i] = obj_bd$SVAUC
-            time_bd[i] = time_bd
+            time_bd[i] = time
 
             #--obtain AUC,CE,SVAUC per iter vectors
             AUC_iter_bd = AUC_iter_bd + obj_bd$AUC_vec
@@ -180,7 +180,7 @@ avg_metrics = function(n_vec=c(100),p_vec=c(100),graph_vec=c("random"),rep_vec=c
             all_graphs_rj = result$all_graphs_rj
             sample_graphs_rj = result$sample_graphs_rj
             all_weights_rj = result$all_weights_rj
-            time_rj = result$time_rj
+            time = result$time_rj
 
             obj_rj = area_ROC_CE_per_iter(all_graphs=all_graphs_rj,sample_graphs=sample_graphs_rj,all_weights=all_weights_rj, actual=actual, thin = thin, verbose = TRUE) 
             
@@ -188,7 +188,7 @@ avg_metrics = function(n_vec=c(100),p_vec=c(100),graph_vec=c("random"),rep_vec=c
             AUC_rj[i] = obj_rj$AUC
             CE_rj[i] = obj_rj$CE
             SVAUC_rj[i] = obj_rj$SVAUC
-            time_rj[i] = time_rj
+            time_rj[i] = time
 
             AUC_iter_rj = AUC_iter_rj + obj_rj$AUC_vec
             CE_iter_rj = CE_iter_rj + obj_rj$CE_vec
@@ -206,7 +206,7 @@ avg_metrics = function(n_vec=c(100),p_vec=c(100),graph_vec=c("random"),rep_vec=c
             all_graphs_ss = result$all_graphs_ss
             sample_graphs_ss = result$sample_graphs_ss
             all_weights_ss = result$all_weights_ss
-            time_ss = result$time_ss
+            time = result$time_ss
 
             obj_ss = area_ROC_CE_per_iter(all_graphs=all_graphs_ss,sample_graphs=sample_graphs_ss,all_weights=all_weights_ss, actual=actual, thin = thin, verbose = TRUE) 
 
@@ -214,7 +214,7 @@ avg_metrics = function(n_vec=c(100),p_vec=c(100),graph_vec=c("random"),rep_vec=c
             AUC_ss[i] = obj_ss$AUC
             CE_ss[i] = obj_ss$CE
             SVAUC_ss[i] = obj_ss$SVAUC
-            time_ss[i] = time_ss
+            time_ss[i] = time
 
             AUC_iter_ss = AUC_iter_ss + obj_ss$AUC_vec
             CE_iter_ss = CE_iter_ss + obj_ss$CE_vec
