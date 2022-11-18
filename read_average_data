@@ -1,0 +1,112 @@
+#first copy all "AVERAGE" files to the correct working directory
+
+setwd("C:/Users/lvogels/OneDrive - UvA/Documents/PhD-Project-Lucas/0. Projects/0. Review paper/Code/Data/Results_p10v2")
+
+
+
+#filename = paste0("AVERAGE_p",p,"_n",n,"_",graph,".Rdata")
+#load(file = filename)
+
+p_list = c(10)
+n_list = c(10,20,100)
+graph_list = ("random","cluster","scale-free")
+AUC = TRUE
+CE = TRUE
+SVAUC = TRUE
+time = TRUE
+file_AUC = "AUCresult.txt"
+file_time = "timeresult.txt"
+file_SVAUC = "SVAUCresult.txt"
+file_CE = "CEresult.txt"
+round_nr = 2
+
+latex_tables(p_list=p_list,n_list=n_list,graph_list=graph_list,AUC=AUC,CE=CE,SVAUC=SVAUC,time=time,
+file_AUC = file_AUC,file_time = file_time,file_SVAUC = file_SVAUC,file_CE = file_CE,round_nr = round_nr)
+
+p_list = c(10)
+n_list = c(10)
+graph_list = ("random","cluster","scale-free")
+AUC = TRUE
+CE = TRUE
+SVAUC = TRUE
+time = TRUE
+
+iteration_plots(p_list=p_list,n_list=n_list,graph_list=graph_list,AUC=AUC,CE=CE,SVAUC=SVAUC)
+
+
+
+
+#the function below produces the latex tables for AUC, CE, SVAUC and time
+latex_tables = function(p_list=c(10),n_list=c(10),graph_list=c("random"),AUC=TRUE,CE=TRUE,SVAUC=TRUE,time=TRUE,
+file_AUC = "AUCresult.txt",file_time = "timeresult.txt",file_SVAUC = "SVAUCresult.txt",file_CE = "CEresult.txt"
+round_nr = 2){
+    for (p in p_list)
+    {
+        for( n in n_list )
+        {
+            if (AUC){
+                cat("p = ",p,", n = ",n," \\","\\"," \\","\\",sep="",file = file_AUC,"\n", append = TRUE )
+            }
+            if (CE){
+                cat("p = ",p,", n = ",n," \\","\\"," \\","\\",sep="",file = file_CE,"\n", append = TRUE )
+            }
+            if (SVAUC){
+                cat("p = ",p,", n = ",n," \\","\\"," \\","\\",sep="",file = file_SVAUC,"\n", append = TRUE )
+            }
+            if (time){
+                cat("p = ",p,", n = ",n," \\","\\"," \\","\\",sep="",file = file_time,"\n", append = TRUE )
+            }
+
+            for( graph in graph_list )
+            {
+                filename = paste0("AVERAGE_p",p,"_n",n,"_",graph,".Rdata")
+                load(file = filename)
+                result = avg_obj
+                
+                if (AUC){
+                    filename = file_AUC
+                    cat(graph," & ",
+                    round(mean(result $ AUC_mpl_bd),round_nr),"(",round(sd(result $ AUC_mpl_bd),round_nr),") & ",
+                    round(mean(result $ AUC_mpl_rj),round_nr),"(",round(sd(result $ AUC_mpl_rj),round_nr),") & ",
+                    round(mean(result $ AUC_bd),round_nr),"(",round(sd(result $ AUC_bd),round_nr),") & ",
+                    round(mean(result $ AUC_rj),round_nr),"(",round(sd(result $ AUC_rj),round_nr),") & ",
+                    round(mean(result $ AUC_ss),round_nr),"(",round(sd(result $ AUC_ss),round_nr),")",
+                    file = filename,"\n", append = TRUE )
+                }
+
+                if (SVAUC){
+                    filename = file_SVAUC
+                    cat(graph," & ",
+                    round(mean(result $ SVAUC_mpl_bd),round_nr),"(",round(sd(result $ SVAUC_mpl_bd),round_nr),") & ",
+                    round(mean(result $ SVAUC_mpl_rj),round_nr),"(",round(sd(result $ SVAUC_mpl_rj),round_nr),") & ",
+                    round(mean(result $ SVAUC_bd),round_nr),"(",round(sd(result $ SVAUC_bd),round_nr),") & ",
+                    round(mean(result $ SVAUC_rj),round_nr),"(",round(sd(result $ SVAUC_rj),round_nr),") & ",
+                    round(mean(result $ SVAUC_ss),round_nr),"(",round(sd(result $ SVAUC_ss),round_nr),")",
+                    file = filename,"\n", append = TRUE )
+                }
+
+                if (CE){
+                    filename = file_CE
+                    cat(graph," & ",
+                    round(mean(result $ CE_mpl_bd),round_nr),"(",round(sd(result $ CE_mpl_bd),round_nr),") & ",
+                    round(mean(result $ CE_mpl_rj),round_nr),"(",round(sd(result $ CE_mpl_rj),round_nr),") & ",
+                    round(mean(result $ CE_bd),round_nr),"(",round(sd(result $ CE_bd),round_nr),") & ",
+                    round(mean(result $ CE_rj),round_nr),"(",round(sd(result $ CE_rj),round_nr),") & ",
+                    round(mean(result $ CE_ss),round_nr),"(",round(sd(result $ CE_ss),round_nr),")",
+                    file = filename,"\n", append = TRUE )
+                }
+
+                if (time){
+                    filename = file_time
+                    cat(graph," & ",
+                    round(mean(result $ time_mpl_bd),round_nr),"(",round(sd(result $ time_mpl_bd),round_nr),") & ",
+                    round(mean(result $ time_mpl_rj),round_nr),"(",round(sd(result $ time_mpl_rj),round_nr),") & ",
+                    round(mean(result $ time_bd),round_nr),"(",round(sd(result $ time_bd),round_nr),") & ",
+                    round(mean(result $ time_rj),round_nr),"(",round(sd(result $ time_rj),round_nr),") & ",
+                    round(mean(result $ time_ss),round_nr),"(",round(sd(result $ time_ss),round_nr),")",
+                    file = filename,"\n", append = TRUE )
+                }
+            }    
+        }    
+    }    
+}

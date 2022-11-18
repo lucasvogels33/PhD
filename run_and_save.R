@@ -33,10 +33,9 @@ lambda = 1 #ss parameter
 #-- run experiments
 for (i in 1:iter_rep) 
 {
-    set.seed(i)
     result = run_experiments( p = p, n = n, graph = graph, type = type, vis = vis, 
                       jump = jump, iter = iter, burnin = burnin, save = save, cores = cores,
-                      verbose = verbose,g.start =g.start,var1=var1,var2=var2,lambda=lambda,g.prior=g.prior) 
+                      verbose = verbose,g.start =g.start,var1=var1,var2=var2,lambda=lambda,g.prior=g.prior,seed=i) 
     
     #--print data to a Rdata file
     filename = paste0("result_p",p,"_n",n,"_",graph,"_rep",i,".Rdata")
