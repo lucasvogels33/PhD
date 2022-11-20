@@ -3,7 +3,7 @@
 #SBATCH --output=read_all_jobs_output
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --time=23:59:00
+#SBATCH --time=1-23:59:00
 #SBATCH --partition=normal
 #SBATCH --constraint=gold_6130
 
