@@ -328,6 +328,25 @@ calc_SVAUC = function(response=response,predictor=predictor){
   return(SVAUC)
 }
 
+calc_AUC = function(predictor,response){
+
+  if (length(response) != length(predictor)) {
+    stop("response and predictor vector must be of same length")
+  }
+
+  predictor.order = order(predictor,increasing=TRUE)
+  predictor.sorted = predictor[predictor.order]
+  response.sorted = response[predictor.order]
+  ones = sum(response)
+  zeroes = length(response)-ones
+  
+  #obtain the false postive vector
+  fp = cumsum(response.sorted==0)
+  AUC = sum(fp * response.sorted)
+  AUC = AUC/(zeroes*ones)  
+
+}
+
 CE_ROC_plot_cut = function(response,predictor,plot=FALSE,area=FALSE,cut=200){
   if (length(response) != length(predictor)) {
     stop("response and predictor vector must be of same length")
@@ -465,14 +484,14 @@ area_ROC_CE_per_iter = function (all_graphs=NULL,sample_graphs=NULL,all_weights=
     i = i + 1
     #compute and save area under the curve
     predictor = result_plinks[,g]
-    AUC_vec[i] = auc(pROC::roc(response=response,predictor=predictor,quiet=TRUE))[1]
+    AUC_vec[i] = calc_AUC(predictor=predictor,response=response)   
     CE_vec[i] = sum(abs(predictor-response))/qp
     SVAUC_vec[i] = calc_SVAUC(predictor=predictor,response=response)
   }
   
   #calculate final values AUC, CE, SVAUC and p_links
   plinks = result_plinks[,iter] 
-  AUC = auc(pROC::roc(response=response,predictor=plinks,quiet=TRUE))[1]
+  AUC = calc_AUC(predictor=plinks,response=response)
   CE = sum(abs(plinks-response))/qp
   SVAUC = calc_SVAUC(predictor=plinks,response=response)
 
@@ -484,5 +503,6 @@ area_ROC_CE_per_iter = function (all_graphs=NULL,sample_graphs=NULL,all_weights=
     utils::flush.console()
   }
   
+
   return(list(plinks=plinks,AUC=AUC,CE=CE,SVAUC=SVAUC,AUC_vec = AUC_vec,iter_vec_thin=iter_vec_thin,result_plinks=result_plinks,CE_vec=CE_vec,SVAUC_vec=SVAUC_vec))
 }

@@ -4,8 +4,8 @@ source("read_data_functions.R")
 
 #--set parameters
 graph_list = c("random","cluster","scale-free") 
-n_list = c(50,100,500)
-p_list = c(50)
+n_list = c(10,20,100)
+p_list = c(10)
 rep_list = c(1:50)
 thin = 100
 cut = 200

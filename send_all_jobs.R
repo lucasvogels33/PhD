@@ -25,7 +25,7 @@ create_script = function( n = 50, graph = "random", iter = 1, p = 10, constraint
 
 ## - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - |
 graph_list = c("random","cluster","scale-free") 
-n_list = c(50,100,200)
+n_list = c(50,100,500)
 p_list = c(50)
 iter = 50
 walltime = "3-00:00:00"
