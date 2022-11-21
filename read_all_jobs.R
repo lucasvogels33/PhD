@@ -17,7 +17,7 @@ for (graph in graph_list){
             
             #average over all replications and save    
             avg_obj = avg_metrics(n_vec=c(n),p_vec=c(p),graph_vec=c(graph),rep_vec=rep_list,thin=thin,plot=FALSE,cut=cut)
-            filename = paste0("AVERAGE_p",p,"_n",n,"_",graph,".Rdata")
+            filename = paste0("AVERAGE_p",p,"_n",n,"_",graph,"v2.Rdata")
             save(avg_obj, file = filename )
 
 
