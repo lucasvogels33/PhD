@@ -344,7 +344,8 @@ calc_AUC = function(predictor,response){
   fp = cumsum(response.sorted==0)
   AUC = sum(fp * response.sorted)
   AUC = AUC/(zeroes*ones)  
-
+  return(AUC)
+  
 }
 
 CE_ROC_plot_cut = function(response,predictor,plot=FALSE,area=FALSE,cut=200){
