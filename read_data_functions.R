@@ -334,7 +334,7 @@ calc_AUC = function(predictor,response){
     stop("response and predictor vector must be of same length")
   }
 
-  predictor.order = order(predictor,increasing=TRUE)
+  predictor.order = order(predictor,decreasing=FALSE)
   predictor.sorted = predictor[predictor.order]
   response.sorted = response[predictor.order]
   ones = sum(response)
