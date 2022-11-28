@@ -45,5 +45,5 @@ return(list(time_mpl_bd = time_mpl_bd,
             time_mpl_rj = time_mpl_rj, 
             time_bd = time_bd, 
             time_rj = time_rj, 
-            time_ss = time_ss)
+            time_ss = time_ss))
 }

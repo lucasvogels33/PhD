@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH --job-name=cores_func
+#SBATCH --output=cores_output
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --time=05:00:00
+#SBATCH --partition=normal
+#SBATCH --constraint=gold_6130
+
+cd $HOME/temp3/cores
+module load 2022
+module load R/4.2.1-foss-2022a
+Rscript --no-save --test_cores.R 

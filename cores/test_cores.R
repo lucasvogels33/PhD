@@ -37,8 +37,8 @@ for (p in p_vec){
             jump = jump, iter = iter, burnin = burnin, save = save, cores = cores,
             verbose = verbose,g.start =g.start,var1=var1,var2=var2,lambda=lambda,g.prior=g.prior,seed=i) 
             
-          filename = paste0("result_p",p,"_n",n,"_",graph,"_cores",cores,"_rep",i,".Rdata")
-          save( result, file = filename)
+        filename = paste0("result_p",p,"_n",n,"_",graph,"_cores",cores,"_rep",i,".Rdata")
+        save( result, file = filename)
         }
       }
   }
