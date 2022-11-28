@@ -33,7 +33,7 @@ partition = "normal"
 nodes = 1
 ntasks = 1
 constraint = "gold_6130"
-dir = "$HOME/results_p10"
+dir = "$HOME/results_p100"
 ##---------------------------------------------------------------------------|
 
 
