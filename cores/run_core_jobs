@@ -10,4 +10,4 @@
 cd $HOME/temp3/cores
 module load 2022
 module load R/4.2.1-foss-2022a
-Rscript --no-save --test_cores.R 
+Rscript --no-save --slave test_cores.R 
