@@ -28,12 +28,12 @@ graph_list = c("random","cluster","scale-free")
 n_list = c(100,200,1000)
 p_list = c(100)
 iter = 50
-walltime = "4-23:59:00"
+walltime = "1-23:59:00"
 partition = "normal" 
 nodes = 1
 ntasks = 1
 constraint = "gold_6130"
-dir = "$HOME/results_p100"
+dir = "$HOME/results_p100v2/Results_p100v2"
 ##---------------------------------------------------------------------------|
 
 
