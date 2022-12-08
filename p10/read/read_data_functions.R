@@ -431,7 +431,7 @@ calc_AUC = function(predictor,response){
 
     #create a vector that averages the maximum amount of false positives of the current group with the previous group
     fp = cumsum(response.sorted==0)
-    df <- data.frame(duplicates=cumsum(dup==0),fp=fp)
+    df <- data.frame(duplicates=dup_index,fp=fp)
     max_vec = aggregate(fp ~ duplicates, data=df, max)[,2]
     top = c(0,max_vec)
     bottom = c(max_vec,0)
